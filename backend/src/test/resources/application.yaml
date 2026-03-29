@@ -1,0 +1,10 @@
+spring:
+  datasource:
+  # Testcontainers settings here
+  liquibase:
+    drop-first: true
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: validate

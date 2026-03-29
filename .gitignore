@@ -1,0 +1,14 @@
+# IDE
+.idea/
+*.iml
+
+# Docker data
+orlik_db_data/
+
+# config data
+/.env
+
+# System files
+.DS_Store
+Thumbs.db
+/realm-export-old.json

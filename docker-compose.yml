@@ -1,0 +1,45 @@
+services:
+  db:
+    image: postgres:18-alpine
+    container_name: orlik-db
+    restart: always
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      APP_DB_NAME: ${APP_DB_NAME}
+      KC_DB_NAME: ${KC_DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./docker/postgres/init-db/00-create-databases.sh:/docker-entrypoint-initdb.d/00-create-databases.sh
+      - orlik_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${DB_USER} -d postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: orlik-keycloak
+    command: start-dev --import-realm
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KC_ADMIN_USER}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KC_ADMIN_PASSWORD}
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://db:5432/${KC_DB_NAME}
+      KC_DB_USERNAME: ${DB_USER}
+      KC_DB_PASSWORD: ${DB_PASSWORD}
+      KC_HTTP_ENABLED: "true"
+      KC_HOSTNAME_STRICT: "false"
+    volumes:
+      - ./docker/keycloak/realm-export.json:/opt/keycloak/data/import/realm.json:ro
+    ports:
+      - "8081:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  orlik_db_data:

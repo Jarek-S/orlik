@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "app.db.init-test-data",
+      "type": "java.lang.Boolean",
+      "description": "Flag for initialization with or without database cleaning."
+    }
+  ]
+}

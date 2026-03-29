@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: orlik-backend
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/${APP_DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    enabled: true
+
+  profiles:
+    active: dev
+
+  graphql:
+    graphiql:
+      enabled: true
+      path: /graphiql
+    schema:
+      printer:
+        enabled: true
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8081/realms/orlik-realm
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  liquibase:
+    drop-first: false
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+  liquibase:
+    drop-first: true
+  jpa:
+    hibernate:
+      ddl-auto: validate
