@@ -22,6 +22,7 @@ CREATE TABLE players
     first_name          VARCHAR(100) NOT NULL,
     last_name           VARCHAR(100),
     nick_name           VARCHAR(100),
+    birth_year          INT,
     speed_rank          INT,
     technique_rank      INT,
     defense_skill_rank  INT,

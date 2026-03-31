@@ -29,6 +29,9 @@ public class Player {
     @Column(name = "nick_name")
     private String nickName;
 
+    @Column(name = "birth_year")
+    private Integer birthYear;
+
     @Column(name = "speed_rank")
     private Integer speedRank;
 
