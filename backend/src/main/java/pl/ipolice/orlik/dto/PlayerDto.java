@@ -17,10 +17,10 @@ public record PlayerDto(
         Integer stamina,
 
         String primaryPosition,
-        boolean canPlayAsGk,
-        boolean isGoalkeeperToday,
-        boolean isAdmin,
-        boolean isCoach,
+        Boolean canPlayAsGk,
+        Boolean isGoalkeeperToday,
+        Boolean isAdmin,
+        Boolean isCoach,
 
         Long userId,
         Long groupId,

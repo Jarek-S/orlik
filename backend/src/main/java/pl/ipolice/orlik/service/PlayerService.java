@@ -54,8 +54,8 @@ public class PlayerService {
                 .toList();
     }
 
-    public PlayerDto updatePlayer(Long playerId, PlayerDto dto) {
-        Player player = playerRepository.findById(playerId)
+    public PlayerDto updatePlayer(PlayerDto dto) {
+        Player player = playerRepository.findById(dto.id())
                 .orElseThrow(() -> new EntityNotFoundException("Player not found"));
 
         updateEntityFromDto(player, dto);
@@ -88,9 +88,9 @@ public class PlayerService {
         }
 
         player.setCanPlayAsGk(dto.canPlayAsGk());
-        player.setGoalkeeperToday(dto.isGoalkeeperToday());
-        player.setAdmin(dto.isAdmin());
-        player.setCoach(dto.isCoach());
+        player.setIsGoalkeeperToday(dto.isGoalkeeperToday());
+        player.setIsAdmin(dto.isAdmin());
+        player.setIsCoach(dto.isCoach());
     }
 
     private void updateEntityFromCreateDto(Player player, PlayerCreateDto dto) {

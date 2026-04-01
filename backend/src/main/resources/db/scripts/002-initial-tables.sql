@@ -35,7 +35,7 @@ CREATE TABLE players
     is_coach            BOOLEAN      NOT NULL DEFAULT FALSE,
     user_id             BIGINT,
     group_id            BIGINT       NOT NULL,
-    joined_at           DATE                  DEFAULT CURRENT_DATE NOT NULL,
+    joined_at           DATE,
 
     CONSTRAINT fk_players_user FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE SET NULL,
     CONSTRAINT fk_players_group FOREIGN KEY (group_id) REFERENCES groups (id) ON DELETE CASCADE,

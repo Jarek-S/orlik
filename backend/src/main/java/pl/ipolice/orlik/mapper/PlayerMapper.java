@@ -29,10 +29,10 @@ public class PlayerMapper {
                 // String primaryPosition from enum
                 player.getPrimaryPosition() != null ? player.getPrimaryPosition().name() : null,
 
-                player.isCanPlayAsGk(),          // boolean canPlayAsGk
-                player.isGoalkeeperToday(),      // boolean isGoalkeeperToday
-                player.isAdmin(),                // boolean isAdmin
-                player.isCoach(),                // boolean isCoach
+                player.getCanPlayAsGk(),          // boolean canPlayAsGk
+                player.getIsGoalkeeperToday(),      // boolean isGoalkeeperToday
+                player.getIsAdmin(),                // boolean isAdmin
+                player.getIsCoach(),                // boolean isCoach
 
                 // Relations
                 player.getUser() != null ? player.getUser().getId() : null, // Long userId

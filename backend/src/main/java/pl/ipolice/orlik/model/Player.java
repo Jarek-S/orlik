@@ -52,16 +52,16 @@ public class Player {
     private PrimaryPosition primaryPosition;
 
     @Column(name = "can_play_as_gk")
-    private boolean canPlayAsGk = false;
+    private Boolean canPlayAsGk = false;
 
     @Column(name = "is_goalkeeper_today")
-    private boolean isGoalkeeperToday = false;
+    private Boolean isGoalkeeperToday = false;
 
     @Column(name = "is_admin", nullable = false)
-    private boolean isAdmin = false;
+    private Boolean isAdmin = false;
 
     @Column(name = "is_coach", nullable = false)
-    private boolean isCoach = false;
+    private Boolean isCoach = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

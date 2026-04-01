@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.transaction.annotation.Transactional;
 import pl.ipolice.orlik.BaseIntegrationTest;
 import pl.ipolice.orlik.model.Group;
 import pl.ipolice.orlik.model.Invitation;
@@ -27,6 +26,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @Tag("database")
+@Tag("service")
 public class UserServiceIT extends BaseIntegrationTest {
     @Autowired
     private UserService userService;
@@ -43,7 +43,6 @@ public class UserServiceIT extends BaseIntegrationTest {
     @DisplayName("New user registration")
     class NewUserRegistration {
         @Test
-        @Transactional
         @DisplayName("should create user and his own group when user not exist and has no invite code")
         void shouldCreateUserAndHisOwnGroup() {
             //given
@@ -68,7 +67,6 @@ public class UserServiceIT extends BaseIntegrationTest {
         }
 
         @Test
-        @Transactional
         @DisplayName("should not create user and his own group when exist and has no invite code")
         void shouldNotCreateUserAndHisOwnGroup() {
             //given
@@ -97,7 +95,6 @@ public class UserServiceIT extends BaseIntegrationTest {
     @DisplayName("Player invitation")
     class NewPlayerInvitation {
         @Test
-        @Transactional
         void shouldRegisterNewUserAndJoinGroup_whenInviteIsValid() {
             // Given
             User groupOwner = new User(); // group owner must exist
@@ -135,7 +132,6 @@ public class UserServiceIT extends BaseIntegrationTest {
         }
 
         @Test
-        @Transactional
         void shouldAddExistingUserToGroup_whenInviteIsValid() {
             // Given
             User existingUser = new User();
@@ -175,7 +171,6 @@ public class UserServiceIT extends BaseIntegrationTest {
         }
 
         @Test
-        @Transactional
         void shouldThrowException_whenInvitationIsExpired() {
             // Given
             User groupOwner = new User(); // group owner must exist
