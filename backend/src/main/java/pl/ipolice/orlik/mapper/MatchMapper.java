@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.ipolice.orlik.dto.MatchDto;
 import pl.ipolice.orlik.dto.MatchParticipationDto;
+import pl.ipolice.orlik.dto.PitchDto;
 import pl.ipolice.orlik.model.Match;
 import pl.ipolice.orlik.model.MatchParticipation;
+import pl.ipolice.orlik.model.Pitch;
 
 import java.util.List;
 import java.util.Objects;
@@ -26,7 +28,7 @@ public class MatchMapper {
                 match.getId(),
                 match.getMatchDate(),
                 match.getMatchType(),
-                match.getLocation(),
+                Objects.nonNull(match.getPitch()) ? toPitchDto(match.getPitch()) : null,
                 match.getTeamAScore(),
                 match.getTeamBScore(),
                 participationDtos
@@ -41,5 +43,9 @@ public class MatchMapper {
                 participation.getAssists(),
                 participation.isPlayedAsGoalkeeper()
         );
+    }
+
+    private PitchDto toPitchDto(Pitch pitch) {
+        return new PitchDto(pitch.getId(), pitch.getName(), pitch.getCity());
     }
 }

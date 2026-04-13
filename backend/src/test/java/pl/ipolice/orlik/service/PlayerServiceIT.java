@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.ipolice.orlik.BaseIntegrationTest;
-import pl.ipolice.orlik.dto.PlayerCreateDto;
 import pl.ipolice.orlik.dto.PlayerDto;
+import pl.ipolice.orlik.dto.PlayerSaveDto;
 import pl.ipolice.orlik.model.Group;
 import pl.ipolice.orlik.model.Player;
 import pl.ipolice.orlik.model.User;
@@ -56,7 +56,7 @@ class PlayerServiceIT extends BaseIntegrationTest {
     @Test
     void shouldCreatePlayerSuccessfully() {
         // Given
-        PlayerCreateDto createDto = new PlayerCreateDto(
+        PlayerSaveDto createDto = new PlayerSaveDto(
                 "Adam", "Young", "nickAdam", 2000,
                 PrimaryPosition.ATT.name()
         );
@@ -79,7 +79,7 @@ class PlayerServiceIT extends BaseIntegrationTest {
     @Test
     void shouldFailWhenCreatingPlayerForNonExistentGroup() {
         // Given
-        PlayerCreateDto createDto = new PlayerCreateDto(
+        PlayerSaveDto createDto = new PlayerSaveDto(
                 "Adam", "Young", "nickAdam", 2000,
                 PrimaryPosition.ATT.name()
         );

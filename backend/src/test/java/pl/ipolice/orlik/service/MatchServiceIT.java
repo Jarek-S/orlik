@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pl.ipolice.orlik.BaseIntegrationTest;
 import pl.ipolice.orlik.dto.MatchDto;
 import pl.ipolice.orlik.dto.MatchParticipationDto;
+import pl.ipolice.orlik.dto.MatchSaveDto;
 import pl.ipolice.orlik.model.Match;
 import pl.ipolice.orlik.model.MatchParticipation;
 import pl.ipolice.orlik.model.Player;
@@ -67,11 +68,12 @@ class MatchServiceIT extends BaseIntegrationTest {
                 player2.getId(), Team.TEAM_B, 0, 0, true
         );
 
-        MatchDto matchDto = new MatchDto(
+
+        MatchSaveDto matchDto = new MatchSaveDto(
                 null,
                 LocalDateTime.now(),
                 MatchType.INTERNAL,
-                "Camp Nou",
+                null,
                 2,
                 1,
                 List.of(p1, p2)
@@ -103,7 +105,7 @@ class MatchServiceIT extends BaseIntegrationTest {
         MatchParticipationDto invalidPart = new MatchParticipationDto(
                 999L, Team.TEAM_A, 0, 0, false
         );
-        MatchDto dto = new MatchDto(null, LocalDateTime.now(), MatchType.INTERNAL, "Papricana", 0, 0, List.of(invalidPart));
+        MatchSaveDto dto = new MatchSaveDto(null, LocalDateTime.now(), MatchType.INTERNAL, null, 0, 0, List.of(invalidPart));
 
         // When & Then
         assertThatThrownBy(() -> matchService.createMatch(defaultGroup.getId(), dto))

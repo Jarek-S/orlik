@@ -4,8 +4,8 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.ipolice.orlik.dto.PlayerCreateDto;
 import pl.ipolice.orlik.dto.PlayerDto;
+import pl.ipolice.orlik.dto.PlayerSaveDto;
 import pl.ipolice.orlik.mapper.PlayerMapper;
 import pl.ipolice.orlik.model.Group;
 import pl.ipolice.orlik.model.Player;
@@ -25,7 +25,7 @@ public class PlayerService {
     private final GroupRepository groupRepository;
     private final PlayerMapper playerMapper;
 
-    public PlayerDto createPlayer(Long groupId, PlayerCreateDto dto) {
+    public PlayerDto createPlayer(Long groupId, PlayerSaveDto dto) {
         Group group = groupRepository.findById(groupId)
                 .orElseThrow(() -> new EntityNotFoundException("Group not found"));
 
@@ -93,7 +93,7 @@ public class PlayerService {
         player.setIsCoach(dto.isCoach());
     }
 
-    private void updateEntityFromCreateDto(Player player, PlayerCreateDto dto) {
+    private void updateEntityFromCreateDto(Player player, PlayerSaveDto dto) {
         player.setFirstName(dto.firstName());
         player.setLastName(dto.lastName());
         player.setNickName(dto.nickName());

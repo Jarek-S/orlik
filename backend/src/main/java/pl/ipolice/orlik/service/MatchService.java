@@ -7,14 +7,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ipolice.orlik.dto.MatchDto;
 import pl.ipolice.orlik.dto.MatchParticipationDto;
+import pl.ipolice.orlik.dto.MatchSaveDto;
 import pl.ipolice.orlik.mapper.MatchMapper;
-import pl.ipolice.orlik.model.Group;
-import pl.ipolice.orlik.model.Match;
-import pl.ipolice.orlik.model.MatchParticipation;
-import pl.ipolice.orlik.model.Player;
+import pl.ipolice.orlik.model.*;
 import pl.ipolice.orlik.repository.GroupRepository;
 import pl.ipolice.orlik.repository.MatchRepository;
+import pl.ipolice.orlik.repository.PitchRepository;
 import pl.ipolice.orlik.repository.PlayerRepository;
+
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -25,8 +26,9 @@ public class MatchService {
     private final GroupRepository groupRepository;
     private final PlayerRepository playerRepository;
     private final MatchMapper matchMapper;
+    private final PitchRepository pitchRepository;
 
-    public MatchDto createMatch(Long groupId, MatchDto dto) {
+    public MatchDto createMatch(Long groupId, MatchSaveDto dto) {
         Group group = groupRepository.findById(groupId)
                 .orElseThrow(() -> new EntityNotFoundException("No group with id: " + groupId));
 
@@ -34,7 +36,11 @@ public class MatchService {
         match.setGroup(group);
         match.setMatchDate(dto.matchDate());
         match.setMatchType(dto.matchType());
-        match.setLocation(dto.location());
+        if (Objects.nonNull(dto.pitchId())) {
+            Pitch pitch = pitchRepository.findById(dto.pitchId())
+                    .orElseThrow(() -> new EntityNotFoundException("No pitch with id: " + dto.pitchId()));
+            match.setPitch(pitch);
+        }
         match.setTeamAScore(dto.teamAScore());
         match.setTeamBScore(dto.teamBScore());
 

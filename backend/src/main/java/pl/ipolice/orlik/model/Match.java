@@ -23,8 +23,9 @@ public class Match {
     @Column(nullable = false)
     private LocalDateTime matchDate;
 
-    @Column(nullable = false)
-    private String location;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pitch_id")
+    private Pitch pitch;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

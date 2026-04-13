@@ -6,11 +6,11 @@ import pl.ipolice.orlik.model.enums.MatchType;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record MatchDto(
+public record MatchSaveDto(
         Long id,
         @NotNull LocalDateTime matchDate,
         @NotNull MatchType matchType,
-        @NotNull PitchDto pitchDto,
+        @NotNull Long pitchId,
         Integer teamAScore,
         Integer teamBScore,
 
