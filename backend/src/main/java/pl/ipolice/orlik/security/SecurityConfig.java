@@ -19,7 +19,7 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable) // for GraphQL & JWT we don't need standard CSRF
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/graphiql").permitAll() // for development purposes
+                        .requestMatchers("/graphql", "/graphiql").permitAll() // for development purposes
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2

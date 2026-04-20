@@ -22,8 +22,6 @@ public class Pitch {
     @Column(nullable = false)
     private String city;
 
-    private String postcode;
-
     private String street;
 
     @Column(name = "street_number")

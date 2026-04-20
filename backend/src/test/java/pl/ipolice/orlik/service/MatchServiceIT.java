@@ -8,19 +8,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.ipolice.orlik.BaseIntegrationTest;
 import pl.ipolice.orlik.dto.MatchDto;
-import pl.ipolice.orlik.dto.MatchParticipationDto;
 import pl.ipolice.orlik.dto.MatchSaveDto;
 import pl.ipolice.orlik.model.Match;
-import pl.ipolice.orlik.model.MatchParticipation;
 import pl.ipolice.orlik.model.Player;
 import pl.ipolice.orlik.model.enums.MatchType;
-import pl.ipolice.orlik.model.enums.Team;
-import pl.ipolice.orlik.repository.GroupRepository;
 import pl.ipolice.orlik.repository.MatchRepository;
 import pl.ipolice.orlik.repository.PlayerRepository;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -35,8 +30,6 @@ class MatchServiceIT extends BaseIntegrationTest {
     private MatchRepository matchRepository;
     @Autowired
     private PlayerRepository playerRepository;
-    @Autowired
-    private GroupRepository groupRepository;
 
     private Player player1;
     private Player player2;
@@ -61,22 +54,10 @@ class MatchServiceIT extends BaseIntegrationTest {
     @Test
     void shouldCreateMatchWithParticipations() {
         // Given
-        MatchParticipationDto p1 = new MatchParticipationDto(
-                player1.getId(), Team.TEAM_A, 2, 1, false
-        );
-        MatchParticipationDto p2 = new MatchParticipationDto(
-                player2.getId(), Team.TEAM_B, 0, 0, true
-        );
-
-
         MatchSaveDto matchDto = new MatchSaveDto(
-                null,
-                LocalDateTime.now(),
+                LocalDateTime.now().plusDays(1),
                 MatchType.INTERNAL,
-                null,
-                2,
-                1,
-                List.of(p1, p2)
+                null
         );
 
         // When
@@ -84,32 +65,19 @@ class MatchServiceIT extends BaseIntegrationTest {
 
         // Then
         assertThat(result.id()).isNotNull();
-        assertThat(result.participations().size()).isEqualTo(2);
 
         Match dbMatch = matchRepository.findById(result.id()).orElseThrow(EntityNotFoundException::new);
-        assertThat(dbMatch.getParticipations().size()).isEqualTo(2);
-        assertThat(dbMatch.getTeamAScore()).isEqualTo(2);
-
-        MatchParticipation p1Stats = dbMatch.getParticipations().stream()
-                .filter(p -> p.getPlayer().getId().equals(player1.getId()))
-                .findFirst().orElse(new MatchParticipation());
-
-        assertThat(p1Stats.getGoals()).isEqualTo(2);
-        assertThat(p1Stats.getAssists()).isEqualTo(1);
-        assertThat(p1Stats.isPlayedAsGoalkeeper()).isFalse();
+        assertThat(dbMatch.getParticipations().size()).isEqualTo(0);
     }
 
     @Test
-    void shouldThrowExceptionWhenPlayerNotFound() {
+    void shouldThrowExceptionWhenDateNotFromFuture() {
         // Given
-        MatchParticipationDto invalidPart = new MatchParticipationDto(
-                999L, Team.TEAM_A, 0, 0, false
-        );
-        MatchSaveDto dto = new MatchSaveDto(null, LocalDateTime.now(), MatchType.INTERNAL, null, 0, 0, List.of(invalidPart));
+        MatchSaveDto dto = new MatchSaveDto(LocalDateTime.now(), MatchType.INTERNAL, null);
 
         // When & Then
         assertThatThrownBy(() -> matchService.createMatch(defaultGroup.getId(), dto))
-                .isInstanceOf(EntityNotFoundException.class)
-                .hasMessageContaining("No player");
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("future");
     }
 }

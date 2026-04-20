@@ -15,7 +15,7 @@ public class DemoPlayerController {
     private final DemoPlayerRepository demoPlayerRepository;
 
     @QueryMapping
-    public List<DemoPlayer> demoPlayers() {
+    public List<DemoPlayer> getDemoPlayers() {
         return demoPlayerRepository.findAll();
     }
 }

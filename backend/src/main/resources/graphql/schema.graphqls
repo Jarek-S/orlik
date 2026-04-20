@@ -1,0 +1,96 @@
+# enums
+enum GroupRole {
+    OWNER
+    ADMIN
+    SELECTOR
+    PLAYER
+}
+
+enum PrimaryPosition {
+    GK,
+    DEF,
+    MID,
+    ATT
+}
+
+enum MatchType {
+    INTERNAL
+    MIXED_EXTERNAL
+    TEAM_EXTERNAL
+}
+
+enum Team {
+    TEAM_A
+    TEAM_B
+}
+
+# types
+type DemoPlayer {
+    id: ID!
+    name: String!
+    speedRank: Int
+    techniqueRank: Int
+    primaryPosition: String
+}
+
+type Pitch {
+    id: ID!
+    name: String!
+    city: String!
+}
+
+type MatchParticipation {
+    playerId: ID!
+    team: Team!
+    goals: Int!
+    assists: Int!
+    playedAsGoalkeeper: Boolean
+    isMvp: Boolean
+}
+
+type Match {
+    id: ID!
+    matchDate: String!
+    matchType: MatchType!
+    pitch: Pitch
+    teamAScore: Int
+    teamBScore: Int
+    participations: [MatchParticipation!]!
+}
+
+
+# inputs
+input ParticipationSaveInput {
+    playerId: ID!
+    team: Team!
+    goals: Int
+    assists: Int
+    playedAsGoalkeeper: Boolean
+}
+
+input MatchSaveInput {
+    matchDate: String!
+    matchType: MatchType!
+    pitchId: ID!
+}
+
+input MatchUpdateInput {
+    matchDate: String
+    matchType: MatchType
+    pitchId: ID
+    teamAScore: Int
+    teamBScore: Int
+    participations: [ParticipationSaveInput!]
+}
+
+
+# operations
+type Query {
+    getDemoPlayers: [DemoPlayer!]!
+    getMatch(id: ID!): Match
+}
+
+type Mutation {
+    createMatch(groupId: ID!, matchData: MatchSaveInput!): Match!
+    updateMatch(matchId: ID!, input: MatchUpdateInput!): Match!
+}

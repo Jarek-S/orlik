@@ -41,7 +41,8 @@ public class MatchMapper {
                 participation.getTeam(),
                 participation.getGoals(),
                 participation.getAssists(),
-                participation.isPlayedAsGoalkeeper()
+                participation.isPlayedAsGoalkeeper(),
+                participation.isMvp()
         );
     }
 

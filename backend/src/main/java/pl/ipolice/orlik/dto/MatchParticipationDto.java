@@ -8,6 +8,7 @@ public record MatchParticipationDto(
         @NotNull Team team,
         Integer goals,
         Integer assists,
-        Boolean playedAsGoalkeeper
+        Boolean playedAsGoalkeeper,
+        Boolean isMvp
 ) {
 }

@@ -21,7 +21,7 @@ public class MatchParticipation {
     private Match match;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "player_id")
+    @JoinColumn(name = "player_id", nullable = false)
     private Player player;
 
     @Enumerated(EnumType.STRING)
