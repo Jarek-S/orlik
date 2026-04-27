@@ -1,0 +1,49 @@
+/*Base class*/
+.mi {
+  display: inline-block;
+  width: var(--mi-icon-width);
+  height: var(--mi-icon-height);
+  background-color: currentColor;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+}
+
+.mi-2x {
+  --mi-icon-width: 2rem;
+  --mi-icon-height: 2rem;
+  height: 2rem;
+}
+
+.mi-4x {
+  --mi-icon-width: 4rem;
+  --mi-icon-height: 4rem;
+  height: 4rem;
+}
+
+.mi-6x {
+  --mi-icon-width: 6rem;
+  --mi-icon-height: 6rem;
+  height: 6rem;
+}
+
+.mi-shirt {
+  mask-image: url('../icons/mi/apparel.svg');
+  background-color: var(--primary-color);
+}
+
+.mi-shirt-gk {
+  background-color: var(--color-gk);
+}
+
+.mi-shirt-def {
+  background-color: var(--color-def);
+}
+
+.mi-shirt-mid {
+  background-color: var(--color-mid);
+}
+
+.mi-shirt-att {
+  background-color: var(--color-att);
+}

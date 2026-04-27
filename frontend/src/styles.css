@@ -1,0 +1,42 @@
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "../public/styles/icons.css";
+
+:root {
+  --primary-color: #673ab7; /* Deep Purple */
+  --accent-color: #ffd740; /* Amber */
+  --warn-color: #f44336; /* Red */
+
+  --pitch-green: #006e02;
+  --bg-white: #ffffff;
+  --bg-black: #000000;
+  --bg-dark: #1a1a1a;
+  --border-color: #e0e0e0;
+  --border-color-gray: #888888;
+  --text-color: #333333;
+  --text-color-gray: #888888;
+  --text-color-bright: #eeeeee;
+  --text-color-blue: #1e88e5;
+  --text-color-bright-blue: #7fbffd;
+  --bg-blue: #1e88e5;
+  --border-blue: #1565c0;
+
+  /* players */
+  --color-gk: #e91e63;
+  --color-def: #2196f3;
+  --color-mid: var(--accent-color);
+  --color-att: #4caf50;
+
+  /* shadows */
+  --shadow-light: 0 -4px 10px rgba(0, 0, 0, 0.1);
+  --shadow-up: 0 -10px 20px rgba(0, 0, 0, 0.05);
+  --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  --badge-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  --text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.6);
+
+  /* masks */
+  --active-bg: rgba(255, 255, 255, 0.1);
+
+  /* sizes */
+  --mi-icon-width: 1rem;
+  --mi-icon-height: 1rem;
+}

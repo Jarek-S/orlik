@@ -1,0 +1,91 @@
+<ng-container *transloco="let t">
+  <div class="match-setup-wrapper">
+
+    @if (!teamsResult()) {
+      <div class="selection-view">
+        <h2>{{ t('demo.whoPlaysQuestion') }}</h2>
+
+        <div class="select-all-row">
+          <p>{{ t('demo.select16or18players') }} ({{ t('demo.selected') }}: {{ selectedCount() }})</p>
+          <mat-checkbox
+            [checked]="isAllSelected()"
+            [indeterminate]="selectedCount() > 0 && !isAllSelected()"
+            (change)="toggleAll()">
+            {{ t('demo.selectAll') }} ({{ playerService.players().length }})
+          </mat-checkbox>
+        </div>
+
+        <div class="players-grid">
+          @for (player of playerService.demoPlayers(); track player.id) {
+            <mat-card class="player-card" [class.selected-card]="isPlayerSelected(player.id)"
+                      (click)="togglePlayer(player.id)">
+
+              <mat-card-header>
+                <div mat-card-avatar>
+                  <div class="pos-wrapper">
+                    <span class="mi mi-shirt mi-4x"
+                          [class]="'mi-shirt-' + player.primaryPosition!.toLowerCase()"></span>
+                    <span class="pos-label">{{ player.primaryPosition }}</span>
+                  </div>
+                </div>
+                <mat-card-title class="player-name">
+                  {{ player.name }}
+                </mat-card-title>
+              </mat-card-header>
+
+              <mat-card-content>
+                <div class="stat-row">
+                  <small>{{ 'player.speed' | transloco }}</small>
+                  <mat-progress-bar mode="determinate" [value]="player.speedRank!"></mat-progress-bar>
+                </div>
+                <div class="stat-row">
+                  <small>{{ 'player.technique' | transloco }}</small>
+                  <mat-progress-bar mode="determinate" [value]="player.techniqueRank!"
+                                    color="accent"></mat-progress-bar>
+                </div>
+              </mat-card-content>
+
+              <mat-card-actions align="end">
+                <button mat-button color="primary">
+                  <mat-icon>{{ isPlayerSelected(player.id) ? 'check_circle' : 'add_circle' }}</mat-icon>
+                  {{ isPlayerSelected(player.id) ? ('player.selected' | transloco) : ('player.select' | transloco) }}
+                </button>
+              </mat-card-actions>
+
+            </mat-card>
+          }
+        </div>
+
+      </div>
+      <div class="action-bar">
+        <button mat-flat-button color="primary"
+                [disabled]="!isSelectionValid()"
+                (click)="onGenerate()">
+          {{ t('demo.generateTeams') }}
+        </button>
+      </div>
+
+    } @else {
+      <div class="results-view">
+        <div class="results-header">
+          <button mat-icon-button (click)="teamsResult.set(null)">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+        </div>
+        <h2>{{ t('demo.teams') }}</h2>
+      </div>
+
+      <app-teams [data]="teamsResult()!"></app-teams>
+
+      <div class="actions">
+        <button mat-stroked-button (click)="teamsResult.set(null)">
+          {{ t('demo.backToList') }}
+        </button>
+        <button mat-flat-button color="accent" (click)="onGenerate()">
+          {{ t('demo.generateAgain') }}
+        </button>
+      </div>
+    }
+
+  </div>
+</ng-container>

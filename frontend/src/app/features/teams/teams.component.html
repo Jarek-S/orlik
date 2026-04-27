@@ -1,0 +1,39 @@
+<div class="pitch">
+  <div class="team-half white-side">
+    @for (p of getPlayersByPos(data.teamA, 'GK'); track p.id) {
+      <div class="player-badge"><span class="mi mi-shirt mi-2x"
+                                      [class]="'mi-shirt-' + p.primaryPosition!.toLowerCase()"></span><span>{{ p.name }}</span>
+      </div>
+    }
+    @for (p of getPlayersByPos(data.teamA, 'DEF'); track p.id) {
+      <div class="player-badge"><span class="mi mi-shirt mi-2x"
+                                      [class]="'mi-shirt-' + p.primaryPosition!.toLowerCase()"></span><span>{{ p.name }}</span>
+      </div>
+    }
+    @for (p of getPlayersByPos(data.teamA, 'MID', 'ATT'); track p.id) {
+      <div class="player-badge"><span class="mi mi-shirt mi-2x"
+                                      [class]="'mi-shirt-' + p.primaryPosition!.toLowerCase()"></span><span>{{ p.name }}</span>
+      </div>
+    }
+  </div>
+
+  <div class="vs-divider">VS</div>
+
+  <div class="team-half color-side">
+    @for (p of getPlayersByPos(data.teamB, 'GK'); track p.id) {
+      <div class="player-badge"><span class="mi mi-shirt mi-2x"
+                                      [class]="'mi-shirt-' + p.primaryPosition!.toLowerCase()"></span><span>{{ p.name }}</span>
+      </div>
+    }
+    @for (p of getPlayersByPos(data.teamB, 'DEF'); track p.id) {
+      <div class="player-badge"><span class="mi mi-shirt mi-2x"
+                                      [class]="'mi-shirt-' + p.primaryPosition!.toLowerCase()"></span><span>{{ p.name }}</span>
+      </div>
+    }
+    @for (p of getPlayersByPos(data.teamB, 'MID', 'ATT'); track p.id) {
+      <div class="player-badge"><span class="mi mi-shirt mi-2x"
+                                      [class]="'mi-shirt-' + p.primaryPosition!.toLowerCase()"></span><span>{{ p.name }}</span>
+      </div>
+    }
+  </div>
+</div>

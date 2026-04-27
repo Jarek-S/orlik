@@ -1,0 +1,49 @@
+<div class="dashboard-grid" *transloco="let t">
+  @for (group of groups(); track group.id) {
+    <mat-card class="group-card">
+      <mat-card-header>
+        <div mat-card-avatar class="group-avatar">
+          <mat-icon>sports_soccer</mat-icon>
+        </div>
+        <mat-card-title>{{ group.name }}</mat-card-title>
+        <mat-card-subtitle>{{ group.location }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="role-section">
+          <small>{{ t('role.yourRole') }}:</small>
+          <mat-chip-set>
+            <mat-chip [class.admin-chip]="group.isAdmin"
+                      [class.scout-chip]="!group.isAdmin && group.isScout">
+              {{ t(getRoleLabel(group)) }}
+            </mat-chip>
+          </mat-chip-set>
+        </div>
+
+        <p class="stats">
+          <mat-icon>people</mat-icon>
+          {{ group.memberCount }} {{ t('group.members') }}
+        </p>
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+        <button mat-button color="primary" [routerLink]="['/group', group.id, 'squad']">
+          {{ t('group.viewPlayers') }}
+        </button>
+
+        @if (group.isAdmin || group.isScout) {
+          <button mat-flat-button color="primary">
+            <mat-icon>edit_note</mat-icon>
+            {{ t('group.managePlayers') }}
+          </button>
+        }
+
+        @if (group.isAdmin) {
+          <button mat-icon-button [matTooltip]="t('group.settings')">
+            <mat-icon>settings</mat-icon>
+          </button>
+        }
+      </mat-card-actions>
+    </mat-card>
+  }
+</div>

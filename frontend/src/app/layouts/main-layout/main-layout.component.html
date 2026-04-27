@@ -1,0 +1,35 @@
+<ng-container *transloco="let t">
+  <mat-toolbar color="primary">
+    <span class="link" routerLink="/">⚽ {{ t('common.appName') }}</span>
+    <span class="spacer"></span>
+
+    <div class="lang-selector">
+      <button mat-button
+              [class.active-lang]="activeLang === 'pl'"
+              (click)="setLanguage('pl')">
+        PL
+      </button>
+      <button mat-button
+              [class.active-lang]="activeLang === 'en'"
+              (click)="setLanguage('en')">
+        EN
+      </button>
+    </div>
+
+    @if (!auth.isLoggedIn()) {
+      <button mat-raised-button color="accent" (click)="auth.login()">
+        <mat-icon>login</mat-icon>
+        {{ t('common.signIn') }}
+      </button>
+    } @else {
+      <button mat-raised-button (click)="auth.logout()">
+        <mat-icon>logout</mat-icon>
+        {{ t('common.signOut') }}
+      </button>
+    }
+  </mat-toolbar>
+</ng-container>
+
+<div class="main-container">
+  <router-outlet></router-outlet>
+</div>

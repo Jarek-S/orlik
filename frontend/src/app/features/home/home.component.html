@@ -1,0 +1,45 @@
+<ng-container *transloco="let t">
+  <div class="home-wrapper">
+    <mat-card class="hero-card">
+      <mat-card-header>
+        <div mat-card-avatar class="logo-icon">
+          <mat-icon color="primary">sports_soccer</mat-icon>
+        </div>
+        <mat-card-title>{{ t('common.appName') }}</mat-card-title>
+        <mat-card-subtitle>{{ t('common.appVersion') }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <h1>{{ t('home.controlTheChaos') }}</h1>
+        <p>
+          {{ t('home.heroCall') }}
+        </p>
+      </mat-card-content>
+
+      <mat-card-actions class="actions">
+        <button mat-stroked-button color="accent" routerLink="/demo">
+          <mat-icon>play_circle_outline</mat-icon>
+          {{ t('home.seeDemo') }}
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <div class="features-grid">
+      <div class="feature-item">
+        <mat-icon>groups</mat-icon>
+        <h3>{{ t('home.managePlayers') }}</h3>
+        <p>{{ t('home.managePlayersAd') }}</p>
+      </div>
+      <div class="feature-item">
+        <mat-icon>balance</mat-icon>
+        <h3>{{ t('home.balanceTeams') }}</h3>
+        <p>{{ t('home.balanceTeamsAd') }}</p>
+      </div>
+      <div class="feature-item">
+        <mat-icon>history</mat-icon>
+        <h3>{{ t('home.history') }}</h3>
+        <p>{{ t('home.historyAd') }}</p>
+      </div>
+    </div>
+  </div>
+</ng-container>

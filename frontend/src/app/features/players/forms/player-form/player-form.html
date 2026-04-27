@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Dodaj nowego zawodnika - TODO</h2>
+<mat-dialog-content>
+  <div style="display: flex; flex-direction: column; gap: 10px; padding-top: 10px;">
+    <mat-form-field appearance="outline">
+      <mat-label>Imię i nazwisko</mat-label>
+      <input matInput [(ngModel)]="playerName">
+    </mat-form-field>
+
+    <mat-checkbox [(ngModel)]="isShadow">Gracz "Cień"</mat-checkbox>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Anuluj</button>
+  <button mat-button color="primary" (click)="onSubmit()" [disabled]="!playerName">Zapisz</button>
+</mat-dialog-actions>

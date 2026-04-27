@@ -1,0 +1,43 @@
+.role-section {
+  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  mat-chip {
+    font-weight: 500;
+    --mdc-chip-label-text-size: 12px;
+  }
+
+  .admin-chip {
+    background-color: #673ab7 !important;
+    color: white !important;
+  }
+
+  .scout-chip {
+    background-color: #2196f3 !important;
+    color: white !important;
+  }
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.group-card {
+  border-left: 4px solid transparent;
+
+  &.has-admin {
+    border-left-color: #673ab7;
+  }
+}

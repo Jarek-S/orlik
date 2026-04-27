@@ -1,0 +1,34 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.link {
+  cursor: pointer;
+}
+
+.main-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.lang-selector {
+  margin-right: 15px;
+  display: flex;
+  gap: 5px;
+
+  button {
+    min-width: 40px;
+    padding: 0 8px;
+    line-height: 30px;
+    opacity: 0.6;
+    color: var(--bg-white);
+
+    &.active-lang {
+      opacity: 1;
+      font-weight: bold;
+      border: 1px solid var(--border-color-gray);
+      background: var(--active-bg);
+    }
+  }
+}

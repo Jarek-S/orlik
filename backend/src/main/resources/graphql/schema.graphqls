@@ -58,8 +58,59 @@ type Match {
     participations: [MatchParticipation!]!
 }
 
+type Player {
+    id: ID!
+    firstName: String!
+    lastName: String
+    nickName: String
+    birthYear: Int
+
+    speedRank: Int
+    techniqueRank: Int
+    defenseSkillRank: Int
+    defenseWorkRate: Int
+    stamina: Int
+
+    primaryPosition: PrimaryPosition
+
+    canPlayAsGk: Boolean!
+    isGoalkeeperToday: Boolean!
+    isAdmin: Boolean!
+    isCoach: Boolean!
+
+    user: User
+    group: Group!
+
+    joinedAt: String
+}
+
+type User {
+    id: ID!
+    keycloakId: String!
+    email: String!
+    createdAt: String
+    ownedGroups: [Group!]!
+    players: [Player!]!
+}
+
+type Group {
+    id: ID!
+    name: String
+    owner: User!
+    createdAt: String
+    players: [Player!]!
+}
 
 # inputs
+input PlayerSaveInput {
+    firstName: String!
+    lastName: String
+    nickName: String
+    birthYear: Int
+    primaryPosition: PrimaryPosition
+    groupId: ID!
+}
+
 input ParticipationSaveInput {
     playerId: ID!
     team: Team!
@@ -87,7 +138,14 @@ input MatchUpdateInput {
 # operations
 type Query {
     getDemoPlayers: [DemoPlayer!]!
+    getPlayers: [Player!]!
+    getPlayerById(id: ID!): Player
     getMatch(id: ID!): Match
+    # logged user
+    me: User
+    getGroup(id: ID!): Group
+    # logged user groups
+    myGroups: [Group!]!
 }
 
 type Mutation {
